@@ -12,4 +12,4 @@ EXPOSE 3306
 
 RUN chmod +x setup.sh
 
-CMD ["sh"]
+CMD ["./tools/setup.sh"]

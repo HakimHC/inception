@@ -15,7 +15,7 @@ source /.bashrc
 
 #now lets go for the so called "chicha"
 
-cp ./my.cnf /etc/my.cnf
+cp ./conf /etc/my.cnf
 
 chown -R mysql: /var/lib/mysql
 chmod 777 /var/lib/mysql
