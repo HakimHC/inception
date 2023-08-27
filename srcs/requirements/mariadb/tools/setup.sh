@@ -24,4 +24,9 @@ mysql_install_db
 
 mysqld
 
+# do other things here, then bring the mysql daemon back to the foreground
+# stuff like setting tables up if they dont exist
+
+#fg
+
 #thats all
