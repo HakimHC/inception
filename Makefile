@@ -1,5 +1,5 @@
 DB = db
-WP = wordpress
+WP = wp
 N = nginx
 
 run:
@@ -13,3 +13,5 @@ down:
 
 $(DB):
 	docker compose -f ./srcs/docker-compose.yml exec $(DB) sh
+$(WP):
+	docker compose -f ./srcs/docker-compose.yml exec $(WP) sh
