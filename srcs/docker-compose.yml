@@ -18,7 +18,11 @@ services:
       - .env
     # volumes:
     #   - "/home/hakahmed/data/wordpress:"
+  nginx:
+    build: ./requirements/nginx
+    ports:
+      - "8080:80"
+      - "4242:443"
 
 volumes:
   database:
-
