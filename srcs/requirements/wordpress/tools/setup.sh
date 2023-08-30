@@ -14,7 +14,7 @@ apk add bash \
 mkdir -p /srv/www && cd $_
 # chown www-data: /srv/www
 curl -O https://wordpress.org/latest.tar.gz
-tar zxvf latest.tar.gz
-rm -rf latest.tar.gz
+# tar zxvf latest.tar.gz
+# rm -rf latest.tar.gz
 
 tail -f /dev/null

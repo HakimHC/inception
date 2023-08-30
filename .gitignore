@@ -1,0 +1,4 @@
+# VIM swap files
+srcs/**/*.swp
+srcs/**/*.swo
+srcs/**/*.swn

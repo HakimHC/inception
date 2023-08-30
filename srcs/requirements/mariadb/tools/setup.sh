@@ -22,11 +22,20 @@ chmod 777 /var/lib/mysql
 
 mysql_install_db
 
-mysqld
+mysqld &
+sleep 1
 
-# do other things here, then bring the mysql daemon back to the foreground
-# stuff like setting tables up if they dont exist
+mysql -u root -p$MYSQL_ROOT_PASSWORD << EOF
+CREATE DATABASE wordpress;
+CREATE USER 'wordpressuser'@'localhost' IDENTIFIED BY 'yourpassword';
+GRANT ALL PRIVILEGES ON wordpress.* TO 'wordpressuser'@'localhost';
+FLUSH PRIVILEGES;
+USE wordpress;
+DROP TABLE IF EXISTS Users;
+CREATE TABLE Users (name varchar(255));
+INSERT INTO Users VALUES ('hakim');
+INSERT INTO Users VALUES ('papito');
+EXIT;
+EOF
 
-#fg
-
-#thats all
+mysqladmin -u root -p$MYSQL_ROOT_PASSWORD shutdown && mysqld

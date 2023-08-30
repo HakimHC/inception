@@ -13,7 +13,9 @@ down:
 
 $(DB):
 	docker compose -f ./srcs/docker-compose.yml exec $(DB) sh
+
 $(WP):
 	docker compose -f ./srcs/docker-compose.yml exec $(WP) sh
+
 $(NGINX):
 	docker compose -f ./srcs/docker-compose.yml exec $(NGINX) sh
