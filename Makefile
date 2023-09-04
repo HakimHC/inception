@@ -1,5 +1,5 @@
-DB = db
-WP = wp
+DB = mariadb
+WP = wordpress
 NGINX = nginx
 
 run:

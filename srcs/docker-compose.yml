@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  db:
+  mariadb:
     build: ./requirements/mariadb
     ports:
       - "3306:3306"
@@ -10,18 +10,33 @@ services:
 
     volumes: 
       - "/home/hakahmed/data/db:/var/lib/mysql"
-  wp:
+
+    networks:
+      - wordpress-mariadb
+
+  wordpress:
     build: ./requirements/wordpress
     ports:
       - "9000:9000"
     env_file:
       - .env
-    # volumes:
-    #   - "/home/hakahmed/data/wordpress:"
+
+    networks:
+      - wordpress-nginx
+      - wordpress-mariadb
+
   nginx:
     build: ./requirements/nginx
     ports:
       - "443:443"
+
+    networks:
+      - wordpress-nginx
+
+networks:
+  wordpress-nginx:
+
+  wordpress-mariadb:
 
 volumes:
   database:
