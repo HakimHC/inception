@@ -1,20 +1,17 @@
 #! /bin/sh
 
-#install vim for debugging pursoses
-apk add vim
-
-#i cant stand rl history with arrows (also i use a shell for now for debugging pursoses for now)
-echo "set -o vi" > /.bashrc
-source /.bashrc
-
 apk add bash \
         curl \
-        wget
+        php-fpm \
+        php-phar \
+        php-mysqli \
+        mariadb-client
 
-mkdir -p /srv/www && cd $_
-# chown www-data: /srv/www
-curl -O https://wordpress.org/latest.tar.gz
-# tar zxvf latest.tar.gz
-# rm -rf latest.tar.gz
+curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+
+chmod +x wp-cli.phar
+mv wp-cli.phar /usr/local/bin/wp
+
+wp core download
 
 tail -f /dev/null
