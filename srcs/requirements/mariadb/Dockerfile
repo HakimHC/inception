@@ -6,4 +6,6 @@ COPY ./tools ./tools
 
 RUN chmod +x ./tools/setup.sh
 
+EXPOSE 3306
+
 CMD ["./tools/setup.sh"]

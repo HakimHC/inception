@@ -25,6 +25,9 @@ services:
       - wordpress-nginx
       - wordpress-mariadb
 
+    volumes: 
+      - "/home/hakahmed/data/www:/www"
+
   nginx:
     build: ./requirements/nginx
     ports:
@@ -33,6 +36,9 @@ services:
     networks:
       - wordpress-nginx
 
+    volumes: 
+      - "/home/hakahmed/data/www:/www"
+
 networks:
   wordpress-nginx:
 
@@ -40,3 +46,4 @@ networks:
 
 volumes:
   database:
+  wp:
