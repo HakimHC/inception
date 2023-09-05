@@ -2,3 +2,6 @@
 srcs/**/*.swp
 srcs/**/*.swo
 srcs/**/*.swn
+
+# Test files
+test

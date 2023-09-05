@@ -41,7 +41,6 @@ services:
 
 networks:
   wordpress-nginx:
-
   wordpress-mariadb:
 
 volumes:
