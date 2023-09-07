@@ -13,7 +13,8 @@ RUN apk update && apk add bash \
                          php-fpm \
                          php-phar \
                          php-mysqli \
-                         mariadb-client
+                         mariadb-client \
+                         php-mbstring
 
 COPY ./conf/my.cnf /etc/my.cnf
 COPY ./conf/my.cnf /etc/mysql/my.cnf
