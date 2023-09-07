@@ -3,13 +3,13 @@ WP = wordpress
 NGINX = nginx
 
 run:
-	docker compose -f ./srcs/docker-compose.yml up --build
+	docker compose -f ./srcs/docker-compose.yml up --build --remove-orphans
 
 dt:
-	docker compose -f ./srcs/docker-compose.yml up --build -d
+	docker compose -f ./srcs/docker-compose.yml up --build -d --remove-orphans
 
 down:
-	docker compose -f ./srcs/docker-compose.yml down
+	docker compose -f ./srcs/docker-compose.yml down 
 
 $(DB):
 	docker compose -f ./srcs/docker-compose.yml exec $(DB) sh
