@@ -12,4 +12,8 @@ $COMMON_NAME
 $EMAIL_ADDR
 EOF
 
-nginx -g "daemon off;"
+nginx -g "daemon off;"&
+
+
+touch /var/log/nginx/error.log
+tail -f /var/log/nginx/error.log

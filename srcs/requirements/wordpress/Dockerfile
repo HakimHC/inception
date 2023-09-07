@@ -18,5 +18,6 @@ RUN apk update && apk add bash \
 
 COPY ./conf/my.cnf /etc/my.cnf
 COPY ./conf/my.cnf /etc/mysql/my.cnf
+COPY ./conf/php-fpm.conf /etc/php81/php-fpm.d/www.conf
 
 CMD ["./tools/setup.sh"]

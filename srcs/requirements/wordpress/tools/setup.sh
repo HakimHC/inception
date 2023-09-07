@@ -15,4 +15,5 @@ wp config create --path=/wordpress --dbname=$MYSQL_DATABASE --dbuser=$MYSQL_USER
 
 wp core install --url=example.com --title=Example --admin_user=supervisor --admin_password=strongpassword --admin_email=info@example.com --path=/wordpress
 
-tail -f /dev/null
+#tail -f /dev/null
+php-fpm81 -F
