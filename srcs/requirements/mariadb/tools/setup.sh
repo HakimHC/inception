@@ -8,7 +8,7 @@ mysql_install_db
 mysqld&
 sleep 2
 
-mysql -u root -p$MYSQL_ROOT_PASSWORD << EOF
+mysql -u root -p$MYSQL_ROOT_PASSWORD -h localhost << EOF
 CREATE DATABASE $MYSQL_DATABASE;
 CREATE USER $MYSQL_USER@'%' IDENTIFIED BY '$MYSQL_PASSWORD';
 CREATE USER $MYSQL_USER@'localhost' IDENTIFIED BY '$MYSQL_PASSWORD';
@@ -27,8 +27,6 @@ FLUSH PRIVILEGES;
 EOF
 
 
-
-
 echo ======== USER CREATION FINISHED BY NOW =========
 
-mysqladmin -u root -p$MYSQL_ROOT_PASSWORD shutdown && mysqld
+mysqladmin -u root -p$MYSQL_ROOT_PASSWORD -h localhost shutdown && mysqld

@@ -9,8 +9,7 @@ mv wp-cli.phar /usr/local/bin/wp
 
 wp core download --path=/wordpress
 
-
-wp config create --path=/wordpress --dbname=$MYSQL_DATABASE --dbuser=root --dbpass=dufus --dbhost=mariadb
+#wp config create --path=/wordpress --dbname=$MYSQL_DATABASE --dbuser=root --dbpass=dufus --dbhost=mariadb
 
 #wp core install --url=example.com --title=Example --admin_user=supervisor --admin_password=strongpassword --admin_email=info@example.com --path=/wordpress
 

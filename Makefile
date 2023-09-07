@@ -11,6 +11,10 @@ dt:
 down:
 	docker compose -f ./srcs/docker-compose.yml down 
 
+re:
+	sudo rm -rf /home/hakahmed/data 
+	make 
+
 $(DB):
 	docker compose -f ./srcs/docker-compose.yml exec $(DB) sh
 
