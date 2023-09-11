@@ -7,7 +7,7 @@ curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.pha
 chmod +x wp-cli.phar
 mv wp-cli.phar /usr/local/bin/wp
 
-#sleep 4
+sleep 10
 
 if [ ! -f /wordpress/wp-config.php ]; then
   wp core download --path=/wordpress
@@ -16,7 +16,7 @@ if [ ! -f /wordpress/wp-config.php ]; then
 
   wp core install --url=$DOMAIN_NAME --title=Inception --admin_user=$ADMIN_USER --admin_password=$ADMIN_PASSWORD --admin_email="$ADMIN_EMAIL" --path=/wordpress
 
-  wp user create $WORDPRESS_UER $WORDPRESS_EMAIL --role=author --user_pass=$WORDPRESS_PASSWORD --path=/wordpress
+  wp user create $WORDPRESS_USER $WORDPRESS_EMAIL --role=author --user_pass=$WORDPRESS_PASSWORD --path=/wordpress
 
   wp theme install twentytwentytwo --activate --path=/wordpress
 fi

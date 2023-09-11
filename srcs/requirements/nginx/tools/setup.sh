@@ -1,8 +1,8 @@
 #! /bin/sh
 
-openssl genpkey -algorithm RSA -out /etc/nginx/ssl/private_key.pem
+openssl genpkey -algorithm RSA -out $PRIVKEY_PATH
 
-openssl req -new -x509 -key /etc/nginx/ssl/private_key.pem -out /etc/nginx/ssl/cert.pem -days 365 << EOF
+openssl req -new -x509 -key $PRIVKEY_PATH -out $CERT_PATH -days 365 << EOF
 $COUNTRY
 $PROVINCE
 $LOCALITY

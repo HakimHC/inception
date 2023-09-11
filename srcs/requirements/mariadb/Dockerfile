@@ -1,6 +1,6 @@
 FROM alpine:3.18
 
-RUN apk update && apk add mariadb mariadb-client
+RUN apk update && apk add mariadb mariadb-client openrc
 
 COPY ./conf/my.cnf /etc/mysql/my.cnf
 COPY ./conf/my.cnf /etc/my.cnf

@@ -9,8 +9,9 @@ chmod 777 /var/lib/mysql
 
 mysql_install_db
 
-mysqld&
-sleep 2
+# mysqld&
+# sleep 2
+rc-service mysql start
 
 check_database_query="SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '$MYSQL_DATABASE';"
 result=$(mysql -u root -p$MYSQL_ROOT_PASSWORD -h localhost -e "$check_database_query")
