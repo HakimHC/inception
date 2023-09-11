@@ -28,6 +28,9 @@ services:
     volumes: 
       - "/home/hakahmed/data/wordpress:/wordpress"
 
+    depends_on:
+      - mariadb
+
   nginx:
     build: ./requirements/nginx
     ports:
@@ -38,6 +41,9 @@ services:
 
     volumes: 
       - "/home/hakahmed/data/wordpress:/wordpress"
+
+    depends_on:
+      - wordpress
 
 networks:
   wordpress-nginx:

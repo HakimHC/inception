@@ -15,5 +15,5 @@ EOF
 nginx -g "daemon off;"&
 
 
-touch /var/log/nginx/error.log
-tail -f /var/log/nginx/error.log
+touch /var/log/nginx/all.log
+tail -f /var/log/nginx/all.log
