@@ -46,6 +46,12 @@ services:
 
     depends_on:
       - wordpress
+      - adminer
+
+  adminer:
+    build: ./requirements/adminer
+    volumes: 
+      - "/home/hakahmed/data/wordpress:/wordpress"
 
 networks:
   wordpress-nginx:
