@@ -49,12 +49,12 @@ services:
       - adminer
 
   adminer:
-    build: ./requirements/adminer
+    build: ./requirements/bonus/adminer
     volumes: 
       - "/home/hakahmed/data/wordpress:/wordpress"
 
   vsftpd:
-    build: ./requirements/vsftpd
+    build: ./requirements/bonus/vsftpd
     volumes: 
       - "/home/hakahmed/data/wordpress:/wordpress"
     ports:

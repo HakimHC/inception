@@ -8,8 +8,7 @@ EXPOSE 9000
 
 RUN chmod +x ./tools/setup.sh
 
-RUN apk update && apk add bash \
-                         curl \
+RUN apk update && apk add curl \
                          php-fpm \
                          php-phar \
                          php-mysqli \
