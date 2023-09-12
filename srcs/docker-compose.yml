@@ -53,6 +53,15 @@ services:
     volumes: 
       - "/home/hakahmed/data/wordpress:/wordpress"
 
+  vsftpd:
+    build: ./requirements/vsftpd
+    volumes: 
+      - "/home/hakahmed/data/wordpress:/wordpress"
+    ports:
+      - "21:21"
+    depends_on:
+      - wordpress
+
 networks:
   wordpress-nginx:
   wordpress-mariadb:

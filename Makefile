@@ -1,6 +1,7 @@
 DB = mariadb
 WP = wordpress
 NGINX = nginx
+FTP = vsftpd
 
 run:
 	docker compose -f ./srcs/docker-compose.yml up --build --remove-orphans
@@ -23,3 +24,6 @@ $(WP):
 
 $(NGINX):
 	docker compose -f ./srcs/docker-compose.yml exec $(NGINX) sh
+
+$(FTP):
+	docker compose -f ./srcs/docker-compose.yml exec $(FTP) sh
