@@ -48,6 +48,23 @@ services:
       - wordpress
       - adminer
 
+  redis:
+    build: ./requirements/bonus/redis
+    ports:
+      - "6379:6379"
+    env_file:
+      - .env
+
+    networks:
+      - wordpress-nginx
+
+    volumes: 
+      - "/home/hakahmed/data/wordpress:/wordpress"
+
+    depends_on:
+      - wordpress
+      - nginx
+
   adminer:
     build: ./requirements/bonus/adminer
     volumes: 

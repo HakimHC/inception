@@ -2,6 +2,7 @@ DB = mariadb
 WP = wordpress
 NGINX = nginx
 FTP = vsftpd
+REDIS = redis
 
 run:
 	docker compose -f ./srcs/docker-compose.yml up --build --remove-orphans
@@ -27,3 +28,6 @@ $(NGINX):
 
 $(FTP):
 	docker compose -f ./srcs/docker-compose.yml exec $(FTP) sh
+
+$(REDIS):
+	docker compose -f ./srcs/docker-compose.yml exec $(REDIS) sh
