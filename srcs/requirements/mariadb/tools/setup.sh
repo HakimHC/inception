@@ -17,6 +17,7 @@ if [ ! -d "/var/lib/mysql/$MYSQL_DATABASE" ]; then
   add_query_line "GRANT ALL PRIVILEGES ON $MYSQL_DATABASE.* TO $MYSQL_USER@'%' WITH GRANT OPTION;"
   add_query_line "GRANT ALL PRIVILEGES ON $MYSQL_DATABASE.* TO $MYSQL_USER@'localhost' WITH GRANT OPTION;"
   add_query_line "FLUSH PRIVILEGES;"
+  mysqld --init-file=$MYSQL_INIT_FILE > /dev/null 2>&1
+else
+  mysqld > /dev/null 2>&1
 fi
-
-mysqld --init-file=$MYSQL_INIT_FILE

@@ -75,6 +75,11 @@ services:
     depends_on:
       - wordpress
 
+  static-page:
+    build: ./requirements/bonus/static-page
+    volumes: 
+      - "/home/hakahmed/data/wordpress:/wordpress"
+
 networks:
   wordpress-nginx:
   wordpress-mariadb:

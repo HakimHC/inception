@@ -8,7 +8,7 @@ check_connection() {
 #mkdir /var/log/mysql
 
 # install wordpress cli
-curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar --silent
 chmod +x wp-cli.phar
 mv wp-cli.phar /usr/local/bin/wp
 
@@ -44,8 +44,5 @@ if [ ! -f "/wordpress/static-page/index.html" ]; then
   mkdir -p /wordpress/static-page 2>/dev/null
   cp ./tools/index.html /wordpress/static-page
 fi
-
-echo "Available WordPress themes:"
-wp theme list --path=/wordpress
 
 php-fpm81 --nodaemonize

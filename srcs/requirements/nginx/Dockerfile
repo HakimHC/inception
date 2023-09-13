@@ -10,8 +10,6 @@ RUN mkdir /app && mkdir /www && mkdir /etc/nginx/ssl
 
 WORKDIR /app
 
-COPY ./index.html /www
-
 COPY tools ./tools
 COPY conf/nginx.conf /etc/nginx/nginx.conf
 
