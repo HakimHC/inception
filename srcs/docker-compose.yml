@@ -84,11 +84,12 @@ services:
 
     networks:
       - wordpress-mariadb
+      - wordpress-nginx
 
   static-page:
     build: ./requirements/bonus/static-page
     volumes: 
-      - "/home/hakahmed/data/wordpress:/wordpress"
+      - "/home/hakahmed/data/grafana:/usr/share/grafana"
 
 networks:
   wordpress-nginx:
@@ -97,3 +98,4 @@ networks:
 volumes:
   database:
   wp:
+  grafana:

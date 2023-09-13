@@ -1,4 +1,5 @@
 #! /bin/sh
 
-#grafana-server
-tail -f /dev/null
+# tail -f /dev/null
+# grafana-server
+grafana-server --config=/etc/grafana/grafana.ini --homepath=/usr/share/grafana
