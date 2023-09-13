@@ -3,6 +3,7 @@ WP = wordpress
 NGINX = nginx
 FTP = vsftpd
 REDIS = redis
+GRAF = grafana
 
 run:
 	docker compose -f ./srcs/docker-compose.yml up --build --remove-orphans
@@ -31,3 +32,5 @@ $(FTP):
 
 $(REDIS):
 	docker compose -f ./srcs/docker-compose.yml exec $(REDIS) sh
+$(GRAF):
+	docker compose -f ./srcs/docker-compose.yml exec $(GRAF) sh

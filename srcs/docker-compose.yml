@@ -75,6 +75,16 @@ services:
     depends_on:
       - wordpress
 
+  grafana:
+    build: ./requirements/bonus/grafana
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mariadb
+
+    networks:
+      - wordpress-mariadb
+
   static-page:
     build: ./requirements/bonus/static-page
     volumes: 
