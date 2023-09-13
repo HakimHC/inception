@@ -61,10 +61,6 @@ services:
     volumes: 
       - "/home/hakahmed/data/wordpress:/wordpress"
 
-    depends_on:
-      - wordpress
-      - nginx
-
   adminer:
     build: ./requirements/bonus/adminer
     volumes: 

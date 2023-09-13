@@ -1,4 +1,4 @@
 #! /bin/sh
 
-# tail -f /dev/null
+echo "Starting redis server..."
 redis-server /etc/redis.conf
