@@ -33,7 +33,10 @@ if [ ! -f /wordpress/wp-config.php ]; then
 
   wp user create $WORDPRESS_USER $WORDPRESS_EMAIL --role=author --user_pass=$WORDPRESS_PASSWORD --path=/wordpress
 
-  wp theme install twentytwentytwo --activate --path=/wordpress
+  wp plugin install redis-cache --activate --path=/wordpress
+  sed -i "93idefine('WP_REDIS_HOST', '$REDIS_HOST');" /wordpress/wp-config.php
+  sed -i "94idefine('WP_CACHE', true);" /wordpress/wp-config.php
+  wp redis enable --path=/wordpress
 fi
 
 # Set up my static page
