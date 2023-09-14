@@ -1,6 +1,6 @@
 FROM alpine:3.18
 
-RUN apk update && apk add grafana
+RUN apk update && apk add grafana mariadb-client
 
 COPY tools tools
 RUN chmod +x ./tools/setup.sh

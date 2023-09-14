@@ -4,6 +4,7 @@ NGINX = nginx
 FTP = vsftpd
 REDIS = redis
 GRAF = grafana
+ST = static-page
 
 run:
 	docker compose -f ./srcs/docker-compose.yml up --build --remove-orphans
@@ -34,3 +35,5 @@ $(REDIS):
 	docker compose -f ./srcs/docker-compose.yml exec $(REDIS) sh
 $(GRAF):
 	docker compose -f ./srcs/docker-compose.yml exec $(GRAF) sh
+$(ST):
+	docker compose -f ./srcs/docker-compose.yml exec $(ST) sh

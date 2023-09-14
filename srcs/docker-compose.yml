@@ -79,17 +79,21 @@ services:
     build: ./requirements/bonus/grafana
     ports:
       - "3000:3000"
+    env_file:
+      - .env
     depends_on:
       - mariadb
 
     networks:
       - wordpress-mariadb
       - wordpress-nginx
+        # volumes: 
+        #   - "/home/hakahmed/data/grafana:/usr/share/grafana"
 
   static-page:
     build: ./requirements/bonus/static-page
     volumes: 
-      - "/home/hakahmed/data/grafana:/usr/share/grafana"
+      - "/home/hakahmed/data/wordpress:/wordpress"
 
 networks:
   wordpress-nginx:
