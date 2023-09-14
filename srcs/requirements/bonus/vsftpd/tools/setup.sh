@@ -19,5 +19,4 @@ echo "$VSFTPD_USER"|tee -a /etc/vsftpd.userlist > /dev/null
 chown nobody:nogroup $WORDPRESS_DIR
 chown "$VSFTPD_USER":"$VSFTPD_USER" $WORDPRESS_DIR
 
-#vsftpd
-tail -f /dev/null
+vsftpd
