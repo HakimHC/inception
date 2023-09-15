@@ -7,12 +7,11 @@ services:
       - "3306:3306"
     env_file:
       - .env
-
     volumes: 
       - "/home/hakahmed/data/db:/var/lib/mysql"
-
     networks:
       - wordpress-mariadb
+    restart: always
 
   wordpress:
     build: ./requirements/wordpress
@@ -20,16 +19,16 @@ services:
       - "9000:9000"
     env_file:
       - .env
-
+    volumes: 
+      - "/home/hakahmed/data/wordpress:/wordpress"
     networks:
       - wordpress-nginx
       - wordpress-mariadb
-
-    volumes: 
-      - "/home/hakahmed/data/wordpress:/wordpress"
-
+      - ftp
+    restart: always
     depends_on:
       - mariadb
+      - redis
 
   nginx:
     build: ./requirements/nginx
@@ -37,16 +36,14 @@ services:
       - "443:443"
     env_file:
       - .env
-
-    networks:
-      - wordpress-nginx
-
     volumes: 
       - "/home/hakahmed/data/wordpress:/wordpress"
-
+    networks:
+      - wordpress-nginx
+      - ftp
+    restart: always
     depends_on:
       - wordpress
-      - adminer
 
   redis:
     build: ./requirements/bonus/redis
@@ -54,12 +51,11 @@ services:
       - "6379:6379"
     env_file:
       - .env
-
-    networks:
-      - wordpress-nginx
-
     volumes: 
       - "/home/hakahmed/data/wordpress:/wordpress"
+    networks:
+      - wordpress-nginx
+    restart: always
 
   adminer:
     build: ./requirements/bonus/adminer
@@ -68,16 +64,18 @@ services:
 
   vsftpd:
     build: ./requirements/bonus/vsftpd
-    volumes: 
-      - "/home/hakahmed/data/wordpress:/wordpress"
     ports:
       - "21:21"
       - "21000-21100:21000-21100"
-    depends_on:
-      - wordpress
-
     env_file:
       - .env
+    volumes: 
+      - "/home/hakahmed/data/wordpress:/wordpress"
+    networks:
+      - ftp
+    restart: always
+    depends_on:
+      - wordpress
 
   grafana:
     build: ./requirements/bonus/grafana
@@ -85,14 +83,12 @@ services:
       - "3000:3000"
     env_file:
       - .env
-    depends_on:
-      - mariadb
-
     networks:
       - wordpress-mariadb
       - wordpress-nginx
-        # volumes: 
-        #   - "/home/hakahmed/data/grafana:/usr/share/grafana"
+    restart: always
+    depends_on:
+      - mariadb
 
   static-page:
     build: ./requirements/bonus/static-page
@@ -102,6 +98,7 @@ services:
 networks:
   wordpress-nginx:
   wordpress-mariadb:
+  ftp:
 
 volumes:
   database:

@@ -1,4 +1,8 @@
 #! /bin/sh
 
-echo "Starting redis server..."
+print_log() {
+  echo "[ REDIS ]: $1"
+}
+
+print_log "Starting redis server..."
 redis-server /etc/redis.conf
