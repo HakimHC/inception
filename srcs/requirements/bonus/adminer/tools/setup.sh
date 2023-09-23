@@ -5,7 +5,7 @@ print_log() {
 }
 
 check_user() {
-  id "$1"
+  id "$1" >/dev/null 2>&1
 }
 
 if [ ! -d "/adminer/adminer" ]; then
@@ -20,7 +20,8 @@ if [ ! -f "/adminer/adminer/index.php" ]; then
 fi
 
 if ! check_user "$ADMINER_USER"; then
-adduser -h /adminer hakim << EOF
+        print_log "Creating ADMINER user..."
+        adduser -h /adminer hakim << EOF
 $ADMINER_PASSWORD
 $ADMINER_PASSWORD
 EOF
