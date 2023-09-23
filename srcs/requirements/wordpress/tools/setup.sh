@@ -19,7 +19,7 @@ fi
 # connect to db
 while true; do
   print_log "Trying to connect to MYSQL..."
-  if check_connection; then
+  if check_connection >/dev/null 2>&1; then
     break
   fi
   sleep 1

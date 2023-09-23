@@ -4,10 +4,33 @@ print_log() {
   echo "[ ADMINER ]: $1"
 }
 
-if [ ! -d "/wordpress/adminer" ]; then
-	print_log "Installing adminer..."
-	mkdir /wordpress/adminer
-	wget --quiet -O /wordpress/adminer/index.php https://github.com/vrana/adminer/releases/download/v4.8.1/adminer-4.8.1.php
+check_user() {
+  id "$1"
+}
+
+if [ ! -d "/adminer/adminer" ]; then
+	mkdir -p /adminer/adminer
+	print_log "Creating /adminer directory..."
 fi
 
+if [ ! -f "/adminer/adminer/index.php" ]; then
+        print_log "Downloading adminer files..."
+        wget --quiet -O /adminer/adminer/index.php \
+        https://github.com/vrana/adminer/releases/download/v4.8.1/adminer-4.8.1.php
+fi
+
+if ! check_user "$ADMINER_USER"; then
+adduser -h /adminer hakim << EOF
+$ADMINER_PASSWORD
+$ADMINER_PASSWORD
+EOF
+fi
+
+chown -R nobody:nogroup /adminer
+chown -R "$ADMINER_USER":"$ADMINER_USER" /adminer
+
+sed -i "s/\$ADMINER_USER/$ADMINER_USER/" /etc/php81/php-fpm.d/www.conf
+
 print_log "Adminer is ready!"
+
+php-fpm81 --nodaemonize

@@ -1,5 +1,9 @@
 #! /bin/sh
 
+print_log() {
+  echo "[ MARIADB ]: $1"
+}
+
 function add_query_line {
   echo "$1" >> "$MYSQL_INIT_FILE"
 }
@@ -7,11 +11,9 @@ function add_query_line {
 chown -R mysql: /var/lib/mysql
 chmod 777 /var/lib/mysql
 
-# tail -f /dev/null
+mysql_install_db >/dev/null 2>&1
 
-mysql_install_db
-# mysql_secure_installation
-
+print_log "Starting MariaDB server..."
 if [ ! -d "/var/lib/mysql/$MYSQL_DATABASE" ]; then
   rm -f "$MYSQL_INIT_FILE"
   add_query_line "CREATE DATABASE $MYSQL_DATABASE;"
@@ -26,7 +28,9 @@ if [ ! -d "/var/lib/mysql/$MYSQL_DATABASE" ]; then
   add_query_line "CREATE USER 'root'@'localhost' IDENTIFIED BY '$MYSQL_ROOT_PASSWORD';"
   add_query_line "GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' WITH GRANT OPTION;"
   add_query_line "FLUSH PRIVILEGES;"
-  mysqld_safe --init-file=$MYSQL_INIT_FILE
+  print_log "Starting MariDB server..."
+  mysqld_safe --init-file=$MYSQL_INIT_FILE >/dev/null 2>&1
 else
-  mysqld_safe
+  print_log "Starting MariDB server..."
+  mysqld_safe >/dev/null 2>&1
 fi

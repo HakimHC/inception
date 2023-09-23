@@ -1,10 +1,12 @@
 DB = mariadb
 WP = wordpress
 NGINX = nginx
+
 FTP = vsftpd
 REDIS = redis
 GRAF = grafana
 ST = static-page
+ADMINER = adminer
 
 run:
 	docker compose -f ./srcs/docker-compose.yml up --build --remove-orphans
@@ -37,3 +39,5 @@ $(GRAF):
 	docker compose -f ./srcs/docker-compose.yml exec $(GRAF) sh
 $(ST):
 	docker compose -f ./srcs/docker-compose.yml exec $(ST) sh
+$(ADMINER):
+	docker compose -f ./srcs/docker-compose.yml exec $(ADMINER) sh

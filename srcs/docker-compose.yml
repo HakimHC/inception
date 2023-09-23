@@ -11,6 +11,8 @@ services:
       - "/home/hakahmed/data/db:/var/lib/mysql"
     networks:
       - wordpress-mariadb
+      - adminer-mariadb
+      - grafana-mariadb
     restart: always
 
   wordpress:
@@ -21,9 +23,11 @@ services:
       - .env
     volumes: 
       - "/home/hakahmed/data/wordpress:/wordpress"
+      - "/home/hakahmed/data/adminer:/adminer"
     networks:
       - wordpress-nginx
       - wordpress-mariadb
+      - wordpress-redis
       - ftp
     restart: always
     depends_on:
@@ -38,9 +42,13 @@ services:
       - .env
     volumes: 
       - "/home/hakahmed/data/wordpress:/wordpress"
+      - "/home/hakahmed/data/adminer:/adminer"
     networks:
       - wordpress-nginx
+      - grafana-nginx
+      - adminer-nginx
       - ftp
+      - webservers
     restart: always
     depends_on:
       - wordpress
@@ -54,13 +62,20 @@ services:
     volumes: 
       - "/home/hakahmed/data/wordpress:/wordpress"
     networks:
-      - wordpress-nginx
+      - wordpress-redis
     restart: always
 
   adminer:
     build: ./requirements/bonus/adminer
     volumes: 
-      - "/home/hakahmed/data/wordpress:/wordpress"
+      - "/home/hakahmed/data/adminer:/adminer"
+    ports:
+      - "9001:9001"
+    networks:
+      - adminer-nginx
+      - adminer-mariadb
+    env_file:
+      - .env
 
   vsftpd:
     build: ./requirements/bonus/vsftpd
@@ -84,23 +99,44 @@ services:
     env_file:
       - .env
     networks:
-      - wordpress-mariadb
-      - wordpress-nginx
+      - grafana-mariadb
+      - grafana-nginx
     restart: always
     depends_on:
       - mariadb
 
   static-page:
     build: ./requirements/bonus/static-page
-    volumes: 
-      - "/home/hakahmed/data/wordpress:/wordpress"
+    ports:
+      - "8080:80"
+    restart: always
+    networks:
+      - webservers
 
 networks:
   wordpress-nginx:
+  wordpress-redis:
   wordpress-mariadb:
+  grafana-mariadb:
+  grafana-nginx:
+  adminer-nginx:
+  adminer-mariadb:
+  webservers:
   ftp:
 
 volumes:
   database:
+    driver_opts:
+      type: none
+      device: /home/hakahmed/data/db
+      o: bind
   wp:
-  grafana:
+    driver_opts:
+      type: none
+      device: /home/hakahmed/data/wordpress
+      o: bind
+  adminer:
+    driver_opts:
+      type: none
+      device: /home/hakahmed/data/adminer
+      o: bind

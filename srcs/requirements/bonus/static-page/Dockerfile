@@ -1,7 +1,13 @@
 FROM alpine:3.18.3
 
-COPY tools tools
+RUN apk update && apk add nginx
 
-RUN chmod +x tools/setup.sh
+COPY ./conf/nginx.conf /etc/nginx/nginx.conf
+COPY content /static
 
-CMD ["./tools/setup.sh"]
+WORKDIR /static
+
+COPY tools/setup.sh /tmp/setup.sh
+RUN chmod +x /tmp/setup.sh
+
+CMD ["/tmp/setup.sh"]
