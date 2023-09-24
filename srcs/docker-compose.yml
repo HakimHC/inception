@@ -8,7 +8,7 @@ services:
     env_file:
       - .env
     volumes: 
-      - "/home/hakahmed/data/db:/var/lib/mysql"
+      - "database:/var/lib/mysql"
     networks:
       - wordpress-mariadb
       - adminer-mariadb
@@ -22,8 +22,8 @@ services:
     env_file:
       - .env
     volumes: 
-      - "/home/hakahmed/data/wordpress:/wordpress"
-      - "/home/hakahmed/data/adminer:/adminer"
+      - "wp:/wordpress"
+      - "adminer:/adminer"
     networks:
       - wordpress-nginx
       - wordpress-mariadb
@@ -41,8 +41,8 @@ services:
     env_file:
       - .env
     volumes: 
-      - "/home/hakahmed/data/wordpress:/wordpress"
-      - "/home/hakahmed/data/adminer:/adminer"
+      - "wp:/wordpress"
+      - "adminer:/adminer"
     networks:
       - wordpress-nginx
       - grafana-nginx
@@ -60,7 +60,7 @@ services:
     env_file:
       - .env
     volumes: 
-      - "/home/hakahmed/data/wordpress:/wordpress"
+      - "wp:/wordpress"
     networks:
       - wordpress-redis
     restart: always
@@ -68,7 +68,7 @@ services:
   adminer:
     build: ./requirements/bonus/adminer
     volumes: 
-      - "/home/hakahmed/data/adminer:/adminer"
+      - "adminer:/adminer"
     ports:
       - "9001:9001"
     networks:
@@ -85,7 +85,7 @@ services:
     env_file:
       - .env
     volumes: 
-      - "/home/hakahmed/data/wordpress:/wordpress"
+      - "wp:/wordpress"
     networks:
       - ftp
     restart: always
@@ -126,16 +126,19 @@ networks:
 
 volumes:
   database:
+    driver: local
     driver_opts:
       type: none
       device: /home/hakahmed/data/db
       o: bind
   wp:
+    driver: local
     driver_opts:
       type: none
       device: /home/hakahmed/data/wordpress
       o: bind
   adminer:
+    driver: local
     driver_opts:
       type: none
       device: /home/hakahmed/data/adminer

@@ -1,9 +1,9 @@
 const isValidEmailAddress = (addr) => {
-        const regEx = /^\w+@\w+\.\w+$/g;
+        let ret = true;
+        const regEx = /^\w{0,1}.*@\w+\.\w{2,}$/g;
         const result = regEx.exec(addr);
-        if (!result)
-                return false;
-        return true;
+        if (!result) ret = false;
+        return ret;
 };
 
 const validate = (addr) => {
