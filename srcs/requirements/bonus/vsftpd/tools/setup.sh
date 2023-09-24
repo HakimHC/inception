@@ -1,7 +1,7 @@
 #! /bin/sh
 
 print_log() {
-  echo "[ MARIADB ]: $1"
+  echo "[ VSFTPD ]: $1"
 }
 
 check_user() {
@@ -10,7 +10,7 @@ check_user() {
 
 if ! check_user "$VSFTPD_USER"; then
         print_log "Creating FTP user..."
-        adduser -h $WORDPRESS_DIR hakim << EOF
+        adduser -h $WORDPRESS_DIR hakim >/dev/null 2>&1 << EOF
 $VSFTPD_PASSWORD
 $VSFTPD_PASSWORD
 EOF

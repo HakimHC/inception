@@ -21,7 +21,7 @@ fi
 
 if ! check_user "$ADMINER_USER"; then
         print_log "Creating ADMINER user..."
-        adduser -h /adminer hakim << EOF
+        adduser -h /adminer hakim >/dev/null 2>&1 << EOF
 $ADMINER_PASSWORD
 $ADMINER_PASSWORD
 EOF

@@ -3,8 +3,6 @@ version: '3'
 services:
   mariadb:
     build: ./requirements/mariadb
-    ports:
-      - "3306:3306"
     env_file:
       - .env
     volumes: 
@@ -17,8 +15,6 @@ services:
 
   wordpress:
     build: ./requirements/wordpress
-    ports:
-      - "9000:9000"
     env_file:
       - .env
     volumes: 
@@ -55,8 +51,6 @@ services:
 
   redis:
     build: ./requirements/bonus/redis
-    ports:
-      - "6379:6379"
     env_file:
       - .env
     volumes: 
@@ -69,8 +63,6 @@ services:
     build: ./requirements/bonus/adminer
     volumes: 
       - "adminer:/adminer"
-    ports:
-      - "9001:9001"
     networks:
       - adminer-nginx
       - adminer-mariadb
@@ -94,8 +86,6 @@ services:
 
   grafana:
     build: ./requirements/bonus/grafana
-    ports:
-      - "3000:3000"
     env_file:
       - .env
     networks:
@@ -107,8 +97,6 @@ services:
 
   static-page:
     build: ./requirements/bonus/static-page
-    ports:
-      - "8080:80"
     restart: always
     networks:
       - webservers
