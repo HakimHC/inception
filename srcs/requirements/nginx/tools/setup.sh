@@ -22,6 +22,8 @@ EOF
         print_log "TLS certificate generated."
 fi
 
+sed -i "s~\$CERT_PATH~$CERT_PATH;~g" /etc/nginx/nginx.conf
+sed -i "s~\$PRIVKEY_PATH~$PRIVKEY_PATH;~g" /etc/nginx/nginx.conf
 
 print_log "Starting wordpress' NGINX webserver..."
 

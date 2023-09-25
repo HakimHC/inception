@@ -13,7 +13,6 @@ chmod 777 /var/lib/mysql
 
 mysql_install_db >/dev/null 2>&1
 
-print_log "Starting MariaDB server..."
 if [ ! -d "/var/lib/mysql/$MYSQL_DATABASE" ]; then
   rm -f "$MYSQL_INIT_FILE"
   add_query_line "CREATE DATABASE $MYSQL_DATABASE;"

@@ -8,6 +8,8 @@ VOLUMES := db wordpress adminer
 
 VOLUME = $(addprefix $(VOL_DIR)/,$(VOLUMES))
 
+RM = rm -rf 
+
 run: $(VOLUME)
 	docker compose -f $(YML_PATH) up --build --remove-orphans
 
@@ -18,7 +20,7 @@ down:
 	docker compose -f $(YML_PATH) down 
 
 re:
-	sudo rm -rf $(VOL_DIR)
+	$(RM) $(VOL_DIR)
 	make 
 
 $(VOLUME):

@@ -11,7 +11,7 @@ services:
       - wordpress-mariadb
       - adminer-mariadb
       - grafana-mariadb
-    restart: always
+    restart: on-failure
 
   wordpress:
     build: ./requirements/wordpress
@@ -25,7 +25,7 @@ services:
       - wordpress-mariadb
       - wordpress-redis
       - ftp
-    restart: always
+    restart: on-failure
     depends_on:
       - mariadb
       - redis
@@ -45,7 +45,7 @@ services:
       - adminer-nginx
       - ftp
       - webservers
-    restart: always
+    restart: on-failure
     depends_on:
       - wordpress
 
@@ -57,7 +57,7 @@ services:
       - "wp:/wordpress"
     networks:
       - wordpress-redis
-    restart: always
+    restart: on-failure
 
   adminer:
     build: ./requirements/bonus/adminer
@@ -80,7 +80,7 @@ services:
       - "wp:/wordpress"
     networks:
       - ftp
-    restart: always
+    restart: on-failure
     depends_on:
       - wordpress
 
@@ -91,13 +91,13 @@ services:
     networks:
       - grafana-mariadb
       - grafana-nginx
-    restart: always
+    restart: on-failure
     depends_on:
       - mariadb
 
   static-page:
     build: ./requirements/bonus/static-page
-    restart: always
+    restart: on-failure
     networks:
       - webservers
 

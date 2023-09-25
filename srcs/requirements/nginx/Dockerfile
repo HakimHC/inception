@@ -3,9 +3,6 @@ FROM alpine:3.18.3
 RUN apk update && \
     apk add nginx openssl
 
-EXPOSE 443
-EXPOSE 80
-
 RUN mkdir /app && mkdir /www && mkdir /etc/nginx/ssl
 
 WORKDIR /app
@@ -17,4 +14,4 @@ RUN chmod +x tools/setup.sh
 
 EXPOSE 443
 
-CMD ["./tools/setup.sh"]
+ENTRYPOINT ["./tools/setup.sh"]
